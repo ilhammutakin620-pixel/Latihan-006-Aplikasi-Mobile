@@ -1,4 +1,4 @@
-# Latihan 006 - Aplikasi Profil (Praktikum Hari 1)
+# Latihan 006 - Aplikasi Profil (Praktikum Pemrograman Mobile)
 
 * **Nama:** Muhammad Ilham Muttaqim  
 * **Mata Kuliah:** Aplikasi Mobile (KB1185)  
@@ -6,27 +6,28 @@
 
 ---
 
-## 📌 Ringkasan Pengerjaan Hari 1
+## 📌 Riwayat Pengerjaan Praktikum
 
-Di praktikum Hari 1 ini, pengerjaan dibagi menjadi dua tahap sesuai alur modul:
+### Hari 1: Kerangka Dasar & Refactoring Awal
+1. **Pagi (Membuat Kerangka Utama):**  
+   Membuat struktur dasar halaman profil dan memisahkan kodenya menjadi dua file (`lib/main.dart` untuk inisialisasi tema `MaterialApp` dan `lib/profile_page.dart` untuk kerangka `Scaffold`, `AppBar`, dan `Column`).  
+   *Pesan Commit:* `feat: create basic profile page structure with avatar and text`
 
-### 1. Pagi — Membuat Kerangka Utama
-* **Tujuan:** Membuat kerangka dasar aplikasi profil dan memisahkan kodenya menjadi dua file:
-  * `lib/main.dart`: Titik awal aplikasi untuk mengatur tema (`MaterialApp`) dan memanggil halaman profil.
-  * `lib/profile_page.dart`: Berisi tampilan antarmuka profil menggunakan `Scaffold`, `AppBar`, `CircleAvatar`, `Text`, dan tombol `ElevatedButton`.
-
+2. **Siang (Extract Widget Bagian 1):**  
+   Merapikan kode `profile_page.dart` dengan memecah `Column` panjang menjadi dua Custom Widget mandiri: `ProfileAvatar` (foto profil) dan `ProfileInfo` (nama & jabatan dengan passing data).  
+   *Pesan Commit:* `refactor: extract avatar and info into custom widgets`
 
 ---
 
-### 2. Siang — Extract Widget (Bagian 1)
-* **Tujuan:** Merapikan kode `profile_page.dart` agar tidak menumpuk di dalam satu `Column` yang panjang.
-* **Perubahan yang Dilakukan:**
-  1. **Membuat widget `ProfileAvatar`:** Khusus untuk mengatur tampilan foto profil bulat (`CircleAvatar`).
-  2. **Membuat widget `ProfileInfo`:** Khusus untuk menampilkan nama dan jabatan.
-  3. **Menerapkan Passing Data (Parameter):** Widget `ProfileInfo` dibuat dinamis menggunakan parameter constructor (`required this.name` dan `required this.role`), sehingga tidak di-hardcode dan bisa dipakai ulang dengan data yang berbeda.
-* **Hasil di Halaman Utama (`ProfilePage`):**  
-  Struktur kode jadi jauh lebih pendek, rapi, dan mudah dibaca karena tinggal memanggil `ProfileAvatar()` dan `ProfileInfo(...)`.
-
+### Hari 2: Menambahkan Komponen Statistik Profil
+1. **Pagi (Membangun Baris Statistik):**  
+   Menambahkan widget `Row` di bawah tombol Edit Profil yang berisi 3 buah `Column` untuk menampilkan ringkasan data profil:
+   * **Proyek:** Angka "12" dan label "Proyek"
+   * **Followers:** Angka "1.2K" dan label "Followers"
+   * **Following:** Angka "42" dan label "Following"
+   
+   Diberi container berlatar belakang biru muda melengkung (`BoxDecoration`) dan spasi yang rapi (`MainAxisAlignment.spaceEvenly`).  
+   *Pesan Commit:* `feat: add profile statistics row`
 
 ---
 

@@ -33,6 +33,87 @@ class ProfilePage extends StatelessWidget {
               icon: const Icon(Icons.edit),
               label: const Text('Edit Profil'),
             ),
+            const SizedBox(height: 24),
+
+            // Hari 2 (Pagi): Baris Statistik dengan Row dan 3 Column
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Kolom 1: Proyek
+                  Column(
+                    children: [
+                      Text(
+                        '12',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Proyek',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // Kolom 2: Followers
+                  Column(
+                    children: [
+                      Text(
+                        '1.2K',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Followers',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // Kolom 3: Following
+                  Column(
+                    children: [
+                      Text(
+                        '42',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Following',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -40,7 +121,7 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// 1. Custom Widget: ProfileAvatar (Menangani tampilan foto profil)
+// 1. Custom Widget: ProfileAvatar
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
 
@@ -54,7 +135,7 @@ class ProfileAvatar extends StatelessWidget {
   }
 }
 
-// 2. Custom Widget: ProfileInfo (Menerapkan passing data untuk nama dan role)
+// 2. Custom Widget: ProfileInfo (Menerima parameter name & role)
 class ProfileInfo extends StatelessWidget {
   final String name;
   final String role;
