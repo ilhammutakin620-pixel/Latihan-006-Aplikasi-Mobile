@@ -1,39 +1,55 @@
-# Latihan 006 - Aplikasi Profil (Tugas Praktikum Hari 1)
+# Latihan 006 - Aplikasi Profil (Praktikum Hari 1)
 
 * **Nama:** Muhammad Ilham Muttaqim  
-* **Mata Kuliah:** Aplikasi Mobile 
-* **Dosen:** I Ketut Gunawan, S.Kom, M.T.I.  
+* **Mata Kuliah:** Aplikasi Mobile (KB1185)  
+* **Dosen Pengampu:** I Ketut Gunawan, S.Kom, M.T.I.  
 
 ---
 
-## Tugas Hari 1: Membuat Kerangka Utama
+## 📌 Ringkasan Pengerjaan Hari 1
 
-Target tugas hari pertama adalah membuat struktur dasar halaman profil menggunakan `Scaffold`, `AppBar`, `CircleAvatar`, dan `Text` dengan memisahkan kode menjadi dua file:
-1. `lib/main.dart` (untuk inisialisasi aplikasi dan tema)
-2. `lib/profile_page.dart` (khusus untuk tampilan halaman profil)
+Di praktikum Hari 1 ini, pengerjaan dibagi menjadi dua tahap sesuai alur modul:
+
+### 1. Pagi — Membuat Kerangka Utama
+* **Tujuan:** Membuat kerangka dasar aplikasi profil dan memisahkan kodenya menjadi dua file:
+  * `lib/main.dart`: Titik awal aplikasi untuk mengatur tema (`MaterialApp`) dan memanggil halaman profil.
+  * `lib/profile_page.dart`: Berisi tampilan antarmuka profil menggunakan `Scaffold`, `AppBar`, `CircleAvatar`, `Text`, dan tombol `ElevatedButton`.
 
 
 ---
 
-## Catatan Perbaikan Kode 
+### 2. Siang — Extract Widget (Bagian 1)
+* **Tujuan:** Merapikan kode `profile_page.dart` agar tidak menumpuk di dalam satu `Column` yang panjang.
+* **Perubahan yang Dilakukan:**
+  1. **Membuat widget `ProfileAvatar`:** Khusus untuk mengatur tampilan foto profil bulat (`CircleAvatar`).
+  2. **Membuat widget `ProfileInfo`:** Khusus untuk menampilkan nama dan jabatan.
+  3. **Menerapkan Passing Data (Parameter):** Widget `ProfileInfo` dibuat dinamis menggunakan parameter constructor (`required this.name` dan `required this.role`), sehingga tidak di-hardcode dan bisa dipakai ulang dengan data yang berbeda.
+* **Hasil di Halaman Utama (`ProfilePage`):**  
+  Struktur kode jadi jauh lebih pendek, rapi, dan mudah dibaca karena tinggal memanggil `ProfileAvatar()` dan `ProfileInfo(...)`.
 
-Pada kode contoh di modul praktikum (halaman 17), terdapat beberapa kesalahan/bug yang sengaja disisipkan. Berikut perbaikan yang sudah saya lakukan:
 
-1. **Memisahkan Kode Jadi 2 File**
-   * **Masalah:** Di modul, semua kode ditumpuk jadi satu di `main.dart`.
-   * **Perbaikan:** Dipisah menjadi `main.dart` dan `profile_page.dart` agar struktur kodenya lebih rapi dan modular.
+---
 
-2. **Memperbaiki Jarak Foto dan Nama (`SizedBox`)**
-   * **Masalah:** Di bawah foto (`CircleAvatar`), modul memakai `SizedBox(width: 16)`. Karena posisinya ada di dalam `Column` (arah vertikal), `width` tidak memberikan jarak ke bawah.
-   * **Perbaikan:** Diganti menjadi `SizedBox(height: 20)` agar ada jarak vertikal yang pas antara foto profil dan teks nama.
+## 🛠️ Catatan Perbaikan Bug 
 
-3. **Menghapus `Column` yang Bertumpuk**
-   * **Masalah:** Ada `Column` di dalam `Column` yang membungkus teks nama dan profesi secara berlebihan.
-   * **Perbaikan:** Disederhanakan menjadi satu `Column` tunggal dari atas ke bawah sesuai instruksi tugas Hari 1.
+Sesuai instruksi modul di halaman 14 untuk melatih *troubleshooting*, berikut beberapa error/jebakan pada kode modul yang berhasil diperbaiki:
 
-4. **Membuat Posisi Tampilan di Tengah (`Center`)**
-   * **Masalah:** Tampilan profil rata kiri dan kurang simetris di layar.
-   * **Perbaikan:** `Column` dibungkus dengan widget `Center` agar foto, nama, bio, dan tombol berada pas di tengah layar.
+1. **Memperbaiki Jarak Foto dan Nama (`SizedBox`)**
+   * *Masalah di modul:* Di bawah `CircleAvatar` tertulis `SizedBox(width: 16)`. Karena berada di dalam `Column` (arah vertikal), memberi `width` tidak ada efeknya sama sekali sehingga foto dan teks nama menempel rapat.
+   * *Solusi:* Diubah menjadi `SizedBox(height: 20)` agar ada jarak vertikal ke bawah yang pas.
+
+2. **Menghapus `Column` yang Bertumpuk**
+   * *Masalah di modul:* Ada `Column` di dalam `Column` yang membungkus teks nama dan jabatan tanpa alasan yang jelas.
+   * *Solusi:* Disederhanakan dan diekstrak menjadi komponen `ProfileInfo` yang mandiri.
+
+3. **Membuat Posisi Tampilan di Tengah (`Center`)**
+   * *Masalah di modul:* Hanya memakai `Padding` biasa sehingga konten agak condong ke samping.
+   * *Solusi:* `Column` dibungkus dengan widget `Center` agar foto, nama, dan tombol berada simetris tepat di tengah layar.
+
+4. **Pemisahan File (Tidak Monolitik)**
+   * *Masalah di modul:* Semua kode ditumpuk di dalam satu file `main.dart`.
+   * *Solusi:* Dipisah menjadi `main.dart` dan `profile_page.dart` agar rapi dan terstruktur.
+
 
 
 
