@@ -35,85 +35,8 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Hari 2 (Pagi): Baris Statistik dengan Row dan 3 Column
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Kolom 1: Proyek
-                  Column(
-                    children: [
-                      Text(
-                        '12',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Proyek',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  // Kolom 2: Followers
-                  Column(
-                    children: [
-                      Text(
-                        '1.2K',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Followers',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  // Kolom 3: Following
-                  Column(
-                    children: [
-                      Text(
-                        '42',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Following',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // Custom Widget untuk Statistik Profil (Hari 2: Extract Widget Bagian 2)
+            const ProfileStats(),
           ],
         ),
       ),
@@ -121,7 +44,11 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// 1. Custom Widget: ProfileAvatar
+// ==========================================
+// CUSTOM WIDGETS HASIL EXTRACT (REUSABLE)
+// ==========================================
+
+// 1. Custom Widget: ProfileAvatar (Menangani tampilan foto profil)
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
 
@@ -135,7 +62,7 @@ class ProfileAvatar extends StatelessWidget {
   }
 }
 
-// 2. Custom Widget: ProfileInfo (Menerima parameter name & role)
+// 2. Custom Widget: ProfileInfo (Menerapkan passing data untuk nama dan role)
 class ProfileInfo extends StatelessWidget {
   final String name;
   final String role;
@@ -166,6 +93,67 @@ class ProfileInfo extends StatelessWidget {
             color: Colors.grey[700],
           ),
           textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+}
+
+// 3. Custom Widget: ProfileStats (Menangani baris container statistik)
+class ProfileStats extends StatelessWidget {
+  const ProfileStats({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.blue[50],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          StatItem(count: '12', label: 'Proyek'),
+          StatItem(count: '1.2K', label: 'Followers'),
+          StatItem(count: '42', label: 'Following'),
+        ],
+      ),
+    );
+  }
+}
+
+// 4. Custom Widget: StatItem (Item satuan angka dan label agar reusable)
+class StatItem extends StatelessWidget {
+  final String count;
+  final String label;
+
+  const StatItem({
+    super.key,
+    required this.count,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          count,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
+          ),
         ),
       ],
     );
