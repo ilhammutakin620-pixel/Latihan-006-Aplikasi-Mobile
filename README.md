@@ -61,7 +61,14 @@
 * **Tujuan:** Menambahkan daftar pengalaman kerja yang dapat digulir (*scrollable*) menggunakan `ListView.builder` dengan data dummy array, serta membungkusnya dengan `Expanded` di dalam `Column`.
 
 
-#### 🛠️ Bug Modul yang Diperbaiki pada Hari 3 (Pagi):
+#### 2. Siang (Merapikan Tampilan Item List - Card & Extract Widget)
+* **Tujuan:** Mengekstrak baris item dalam `ListView.builder` ke dalam Custom Widget mandiri bernama `ExperienceCard`.
+* **Perubahan:**
+  * Membuat widget `ExperienceCard` dengan parameter `required this.title`.
+  * Menambahkan styling visual: efek bayangan kartu (`elevation: 2`), sudut kartu melengkung halus (`RoundedRectangleBorder`), padding konten, dan ikon kerja (`Icons.work`).
+
+
+#### 🛠️ Bug Modul yang Diperbaiki pada Hari 3:
 1. **Error Layout Unbounded Height (`ListView` langsung di dalam `Column`):**  
    * *Masalah di modul:* Pada halaman 18, `ListView.builder` diletakkan langsung di dalam `Column` tanpa pembungkus ukuran pasti atau `Expanded`. Hal ini menyebabkan Flutter crash dengan error *"Vertical viewport was given unbounded height"* karena `Column` tidak membatasi tinggi dan `ListView` mencoba mengambil tinggi tak terhingga (*infinity*).
    * *Solusi:* Membungkus `ListView.builder` dengan widget `Expanded` agar `ListView` mengisi sisa ruang layar yang tersedia secara proporsional dan bisa digulir tanpa error overflow.
@@ -70,5 +77,4 @@
    * *Solusi:* Menambahkan tanda koma pemisah antar item array agar data terbaca rapi sebagai 4 elemen terpisah.
 
 ---
-
 

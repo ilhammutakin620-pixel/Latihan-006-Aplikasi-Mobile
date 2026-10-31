@@ -5,7 +5,7 @@ class ProfilePage extends StatelessWidget {
 
   // Dummy list pengalaman kerja (sesuai modul praktikum halaman 17)
   final List<String> experiences = const [
-    'Front End Developer - PT Nextwave Teknologi',
+    'Senior Backend Engineer - EDC Bank DKI',
     'Backend & System Architect - Secure Payment EDC',
     'Lead Developer - Aplikasi Sekurindo',
     'Backend Engineer - Pengembangan Sistem E-money',
@@ -60,18 +60,13 @@ class ProfilePage extends StatelessWidget {
             ),
             const Divider(),
 
-            // Hari 3 (Pagi): Expanded membungkus ListView.builder untuk mencegah error unbounded height
+            // Hari 3: ListView.builder yang memanggil Custom Widget ExperienceCard
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    child: ListTile(
-                      leading: const Icon(Icons.work, color: Colors.blueAccent),
-                      title: Text(experiences[index]),
-                    ),
+                  return ExperienceCard(
+                    title: experiences[index],
                   );
                 },
               ),
@@ -195,6 +190,38 @@ class StatItem extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+// 5. Custom Widget: ExperienceCard (Mengekstrak baris ListView menjadi komponen mandiri & rapi)
+class ExperienceCard extends StatelessWidget {
+  final String title;
+
+  const ExperienceCard({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        leading: const Icon(Icons.work, color: Colors.blueAccent),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
     );
   }
 }
