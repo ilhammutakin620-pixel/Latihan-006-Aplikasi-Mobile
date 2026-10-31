@@ -22,6 +22,7 @@
   * Membuat widget `ProfileAvatar` untuk mengisolasi foto profil bulat.
   * Membuat widget `ProfileInfo` untuk menampilkan nama dan jabatan secara dinamis dengan parameter (`required this.name` dan `required this.role`).
 
+
 #### 🛠️ Bug Modul yang Diperbaiki pada Hari 1:
 1. **Pemisahan File (Tidak Monolitik):**  
    Di modul, semua kode ditumpuk di satu file `main.dart`. Diperbaiki dengan memisahkannya menjadi `main.dart` dan `profile_page.dart` agar terstruktur dan rapi.
@@ -51,5 +52,23 @@
    Pada item Following tertulis `StatItem(count: 42)`, padahal parameter `count` bertipe data `String`. Hal ini menyebabkan error kompilasi (*type mismatch*). Diperbaiki menjadi `StatItem(count: '42')`.
 2. **Dimensi Spasi Terbalik di Dalam `Row` (Halaman 18 Modul):**  
    Di antara item di dalam `Row`, modul menulis `SizedBox(height: 24)`. Karena `Row` bekerja secara horizontal, menggunakan `height` tidak memberi jarak mendatar antar item. Diperbaiki menggunakan `MainAxisAlignment.spaceEvenly` pada `Row` agar ketiga kolom statistik tersebar rapi secara otomatis.
+
+---
+
+### Hari 3: Menambahkan Daftar Pengalaman (ListView)
+
+#### 1. Pagi (Implementasi ListView & Expanded)
+* **Tujuan:** Menambahkan daftar pengalaman kerja yang dapat digulir (*scrollable*) menggunakan `ListView.builder` dengan data dummy array, serta membungkusnya dengan `Expanded` di dalam `Column`.
+
+
+#### 🛠️ Bug Modul yang Diperbaiki pada Hari 3 (Pagi):
+1. **Error Layout Unbounded Height (`ListView` langsung di dalam `Column`):**  
+   * *Masalah di modul:* Pada halaman 18, `ListView.builder` diletakkan langsung di dalam `Column` tanpa pembungkus ukuran pasti atau `Expanded`. Hal ini menyebabkan Flutter crash dengan error *"Vertical viewport was given unbounded height"* karena `Column` tidak membatasi tinggi dan `ListView` mencoba mengambil tinggi tak terhingga (*infinity*).
+   * *Solusi:* Membungkus `ListView.builder` dengan widget `Expanded` agar `ListView` mengisi sisa ruang layar yang tersedia secara proporsional dan bisa digulir tanpa error overflow.
+2. **Typo Koma pada List Array (Halaman 17 Modul):**  
+   * *Masalah di modul:* Pada baris list array `experiences`, item ke-3 (`'Lead Developer - Aplikasi Sekurindo'`) lupa diberi tanda koma (`,`) di ujung barisnya sehingga teks menyambung dengan item berikutnya.
+   * *Solusi:* Menambahkan tanda koma pemisah antar item array agar data terbaca rapi sebagai 4 elemen terpisah.
+
+---
 
 

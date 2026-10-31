@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  // Dummy list pengalaman kerja (sesuai modul praktikum halaman 17)
+  final List<String> experiences = const [
+    'Front End Developer - PT Nextwave Teknologi',
+    'Backend & System Architect - Secure Payment EDC',
+    'Lead Developer - Aplikasi Sekurindo',
+    'Backend Engineer - Pengembangan Sistem E-money',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,9 +20,9 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         foregroundColor: Colors.white,
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Custom Widget untuk Foto Profil
             const ProfileAvatar(),
@@ -35,8 +43,39 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Custom Widget untuk Statistik Profil (Hari 2: Extract Widget Bagian 2)
+            // Custom Widget untuk Statistik Profil
             const ProfileStats(),
+            const SizedBox(height: 24),
+
+            // Judul Daftar Pengalaman Kerja
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Pengalaman Kerja',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const Divider(),
+
+            // Hari 3 (Pagi): Expanded membungkus ListView.builder untuk mencegah error unbounded height
+            Expanded(
+              child: ListView.builder(
+                itemCount: experiences.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    child: ListTile(
+                      leading: const Icon(Icons.work, color: Colors.blueAccent),
+                      title: Text(experiences[index]),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
