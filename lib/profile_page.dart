@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+// Hari 4 (Pagi): Konversi ProfilePage dari StatelessWidget menjadi StatefulWidget
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  // Deklarasi variabel userName & role di dalam state agar dinamis (tidak lagi di-hardcode)
+  String userName = 'Muhammad Ilham Muttaqim';
+  String role = 'Mahasiswa TI Angkatan 24 Global Institute';
 
   // Dummy list pengalaman kerja (sesuai modul praktikum halaman 17)
   final List<String> experiences = const [
@@ -28,10 +38,10 @@ class ProfilePage extends StatelessWidget {
             const ProfileAvatar(),
             const SizedBox(height: 20),
 
-            // Custom Widget untuk Info (dengan passing data nama & role)
-            const ProfileInfo(
-              name: 'Muhammad Ilham Muttaqim',
-              role: 'Mahasiswa TI Angkatan 24 Global Institute',
+            // Custom Widget untuk Info (menggunakan variabel dinamis userName & role)
+            ProfileInfo(
+              name: userName,
+              role: role,
             ),
             const SizedBox(height: 32),
 

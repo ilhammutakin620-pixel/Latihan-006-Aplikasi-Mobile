@@ -78,3 +78,11 @@
 
 ---
 
+### Hari 4: State Management Dasar & Interaktivitas
+
+#### 1. Pagi (Konversi ke StatefulWidget & Variabel Dinamis)
+* **Tujuan:** Mengubah `ProfilePage` yang semula `StatelessWidget` menjadi `StatefulWidget`, serta mendeklarasikan variabel `userName` di dalam state class agar nilainya tidak lagi di-hardcode dan siap untuk diperbarui secara dinamis.
+
+
+---
+
