@@ -6,15 +6,15 @@
 
 ---
 
-## 📌 Riwayat Pengerjaan & Troubleshooting Praktikum
+## 📌 Riwayat Pengerjaan & Troubleshooting Praktikum (4 Hari)
 
 ### Hari 1: Kerangka Dasar & Refactoring Awal
 
 #### 1. Pagi (Membuat Kerangka Utama)
 * **Tujuan:** Membuat kerangka dasar aplikasi profil dan memisahkan kodenya menjadi dua file:
   * `lib/main.dart`: Titik awal aplikasi untuk mengatur tema (`MaterialApp`) dan memanggil halaman profil.
-  * `lib/profile_page.dart`: Berisi tampilan antarmuka profil menggunakan `Scaffold`, `AppBar`, `CircleAvatar`, `Text`, dan tombol `ElevatedButton`.
-
+  * `lib/profile_page.dart`: Berisi tampilan antarmuka profil menggunakan `Scaffold`, `AppBar`, `CircleAvatar`, `Text`, dan tombol `ElevatedButton`.  
+  
 
 #### 2. Siang (Extract Widget Bagian 1)
 * **Tujuan:** Merapikan kode `profile_page.dart` agar tidak menumpuk di dalam satu `Column` yang panjang.
@@ -81,8 +81,23 @@
 ### Hari 4: State Management Dasar & Interaktivitas
 
 #### 1. Pagi (Konversi ke StatefulWidget & Variabel Dinamis)
-* **Tujuan:** Mengubah `ProfilePage` yang semula `StatelessWidget` menjadi `StatefulWidget`, serta mendeklarasikan variabel `userName` di dalam state class agar nilainya tidak lagi di-hardcode dan siap untuk diperbarui secara dinamis.
+* **Tujuan:** Mengubah `ProfilePage` yang semula `StatelessWidget` menjadi `StatefulWidget`, serta mendeklarasikan variabel `userName` di dalam state class agar nilainya tidak lagi di-hardcode.
 
+
+#### 2. Siang (Implementasi Form Dialog Edit & State Update)
+* **Tujuan:** Memberikan aksi interaktif pada tombol "Edit Profil" menggunakan fungsi `showDialog` yang berisi `TextFormField`. Saat tombol "Simpan" ditekan, fungsi `setState()` dijalankan untuk memperbarui variabel `userName` di layar utama secara real-time.
+
+
+#### 🛠️ Bug & Keterbatasan Modul yang Diperbaiki pada Hari 4:
+1. **UI Statis Tidak Bisa Di-update (StatelessWidget):**  
+   * *Masalah di modul:* Di modul awal (halaman 17-18), halaman profil dibuat dengan `StatelessWidget` dan tombol Edit Profil hanya memunculkan `SnackBar` statis ("Fitur edit belum aktif pada modul statis"). Akibatnya antarmuka tidak bisa menerima input atau memperbarui data secara dinamis.
+   * *Solusi:* Mengonversi halaman menjadi `StatefulWidget` dan menggunakan `setState()` agar perubahan data pada variabel `userName` langsung memicu *rebuild* tampilan secara real-time.
+2. **Nilai Nama Bersifat Hardcoded:**  
+   * *Masalah di modul:* Nama dideklarasikan sebagai nilai tetap (*hardcoded*) yang tidak bisa diubah oleh pengguna.
+   * *Solusi:* Mengubah nama menjadi variabel state dinamis yang terhubung langsung dengan `TextEditingController` di dalam `TextFormField`.
+3. **Mencegah Nama Kosong (Validasi Input):**  
+   * *Masalah:* Jika pengguna mengosongkan teks input lalu menekan "Simpan", nama di layar utama bisa hilang menjadi teks kosong.
+   * *Solusi:* Menambahkan validasi `nameController.text.trim().isNotEmpty` agar `setState()` hanya memperbarui nama jika input teks benar-benar diisi.
 
 ---
 

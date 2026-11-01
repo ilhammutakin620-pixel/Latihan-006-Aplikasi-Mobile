@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Hari 4 (Pagi): Konversi ProfilePage dari StatelessWidget menjadi StatefulWidget
+// Hari 4: ProfilePage sebagai StatefulWidget untuk State Management & Interaktivitas
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -9,17 +9,59 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // Deklarasi variabel userName & role di dalam state agar dinamis (tidak lagi di-hardcode)
+  // Variabel dinamis di dalam state
   String userName = 'Muhammad Ilham Muttaqim';
   String role = 'Mahasiswa TI Angkatan 24 Global Institute';
 
   // Dummy list pengalaman kerja (sesuai modul praktikum halaman 17)
   final List<String> experiences = const [
-    'Senior Backend Engineer - EDC Bank DKI',
+    'Frontend Developer - PT Nextwave Teknologi',
     'Backend & System Architect - Secure Payment EDC',
     'Lead Developer - Aplikasi Sekurindo',
     'Backend Engineer - Pengembangan Sistem E-money',
   ];
+
+  // Hari 4 (Siang): Fungsi menampilkan dialog edit nama dengan form input
+  void _showEditProfileDialog() {
+    final TextEditingController nameController =
+        TextEditingController(text: userName);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+          content: TextFormField(
+            controller: nameController,
+            decoration: const InputDecoration(
+              labelText: 'Nama Lengkap',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Tutup dialog tanpa perubahan
+              },
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (nameController.text.trim().isNotEmpty) {
+                  // Menggunakan setState untuk memperbarui variabel userName di layar utama
+                  setState(() {
+                    userName = nameController.text.trim();
+                  });
+                }
+                Navigator.pop(context); // Tutup dialog setelah simpan
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +87,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 32),
 
-            // Tombol interaksi standar
+            // Hari 4 (Siang): Tombol Edit Profil yang memicu showDialog
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: _showEditProfileDialog,
               icon: const Icon(Icons.edit),
               label: const Text('Edit Profil'),
             ),
